@@ -1,1 +1,2 @@
 # FMN011-Numerical_Analysis
+MODEL OF A STEWART PLATFORM
