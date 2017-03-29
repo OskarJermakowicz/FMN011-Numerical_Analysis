@@ -26,11 +26,11 @@ def geval(L, b, d):
 
 # Determines the left hand side of equations for calculating the X-coordinates of the vertices in the upper frame. Ideally the left hand side should equal zero.
 def stf(a, gev, xt):
-    equations = [0, 0, 0]
+    equations = []
 
-    equations[0] = a**2 + 2*xt[0]*xt[1] - 2*xt[0]*(gev[0][1] + math.sqrt(3)*(gev[0][2]-gev[1][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[0][1]-gev[0][2])**2 + (gev[0][0]**2 + gev[1][0]**2) - 4*gev[0][1]**2 - gev[1][1]**2) + 2*math.sqrt((gev[0][0]**2 - 4*(xt[0]-gev[0][1])**2)*(gev[1][0]**2 - (xt[1] - gev[1][1])**2))
-    equations[1] = a**2 - 4*xt[0]*xt[2] - 2*xt[0]*(gev[0][1] - 3*gev[2][1] + math.sqrt(3)*(gev[0][2]-gev[2][2])) - 2*xt[2]*((-3)*gev[0][1] + gev[2][1] + math.sqrt(3)*(gev[0][2] - gev[2][2])) - ((math.sqrt(3)*(gev[0][1] + gev[2][1]) - gev[0][2] + gev[2][2])**2 + (gev[0][0]**2 + gev[2][0]**2) - 4*gev[0][1]**2 - 4*gev[2][1]**2) + 2*math.sqrt((gev[0][0]**2 - 4*(xt[0] - gev[0][1])**2)*(gev[2][0]**2 - 4*(xt[2] - gev[2][1])**2))
-    equations[2] = a**2 + 2*xt[1]*xt[2] - 2*xt[2]*(gev[2][1] + math.sqrt(3)*(gev[1][2] - gev[2][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[2][1] - gev[1][2] + gev[2][2])**2 + (gev[1][0]**2 + gev[2][0]**2) - gev[1][1]**2 - 4*gev[2][1]**2) + 2*math.sqrt((gev[1][0]**2 - (xt[1] - gev[1][1])**2)*(gev[2][0] - 4*(xt[2] - gev[2][1])**2))
+    equations.append(a**2 + 2*xt[0]*xt[1] - 2*xt[0]*(gev[0][1] + math.sqrt(3)*(gev[0][2]-gev[1][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[0][1]-gev[0][2] + gev[1][2])**2 + (gev[0][0]**2 + gev[1][0]**2) - 4*gev[0][1]**2 - gev[1][1]**2) + 2*math.sqrt((gev[0][0]**2 - 4*(xt[0]-gev[0][1])**2)*(gev[1][0]**2 - (xt[1] - gev[1][1])**2)))
+    equations.append(a**2 - 4*xt[0]*xt[2] - 2*xt[0]*(gev[0][1] - 3*gev[2][1] + math.sqrt(3)*(gev[0][2]-gev[2][2])) - 2*xt[2]*((-3)*gev[0][1] + gev[2][1] + math.sqrt(3)*(gev[0][2] - gev[2][2])) - ((math.sqrt(3)*(gev[0][1] + gev[2][1]) - gev[0][2] + gev[2][2])**2 + (gev[0][0]**2 + gev[2][0]**2) - 4*gev[0][1]**2 - 4*gev[2][1]**2) + 2*math.sqrt((gev[0][0]**2 - 4*(xt[0] - gev[0][1])**2)*(gev[2][0]**2 - 4*(xt[2] - gev[2][1])**2)))
+    equations.append(a**2 + 2*xt[1]*xt[2] - 2*xt[2]*(gev[2][1] + math.sqrt(3)*(gev[1][2] - gev[2][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[2][1] - gev[1][2] + gev[2][2])**2 + (gev[1][0]**2 + gev[2][0]**2) - gev[1][1]**2 - 4*gev[2][1]**2) + 2*math.sqrt((gev[1][0]**2 - (xt[1] - gev[1][1])**2)*(gev[2][0]**2 - 4*(xt[2] - gev[2][1])**2)))
 
     return equations
 
@@ -49,7 +49,7 @@ def task2():
     b = 15
     d = 1
     a = 10
-    xt = [2, 2, 2]
+    xt = [5, -5, 5]
 
     print(stf(a, geval(L, b, d), xt))
 
