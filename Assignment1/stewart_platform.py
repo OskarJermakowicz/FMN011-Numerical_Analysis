@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import scipy.optimize as sci
 
 # Returns a list of three elements, for each i, which includes h, x and y for each.
 def geval(L, b, d):
@@ -25,7 +26,7 @@ def geval(L, b, d):
     return res
 
 # Determines the left hand side of equations for calculating the X-coordinates of the vertices in the upper frame. Ideally the left hand side should equal zero.
-def stf(a, gev, xt):
+def stf(xt, a, gev):
     equations = []
 
     equations.append(a**2 + 2*xt[0]*xt[1] - 2*xt[0]*(gev[0][1] + math.sqrt(3)*(gev[0][2]-gev[1][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[0][1]-gev[0][2] + gev[1][2])**2 + (gev[0][0]**2 + gev[1][0]**2) - 4*gev[0][1]**2 - gev[1][1]**2) + 2*math.sqrt((gev[0][0]**2 - 4*(xt[0]-gev[0][1])**2)*(gev[1][0]**2 - (xt[1] - gev[1][1])**2)))
@@ -33,7 +34,6 @@ def stf(a, gev, xt):
     equations.append(a**2 + 2*xt[1]*xt[2] - 2*xt[2]*(gev[2][1] + math.sqrt(3)*(gev[1][2] - gev[2][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[2][1] - gev[1][2] + gev[2][2])**2 + (gev[1][0]**2 + gev[2][0]**2) - gev[1][1]**2 - 4*gev[2][1]**2) + 2*math.sqrt((gev[1][0]**2 - (xt[1] - gev[1][1])**2)*(gev[2][0]**2 - 4*(xt[2] - gev[2][1])**2)))
 
     return equations
-
 
 def task1():
     #L = [3, 3, 3, 3, 3, 3]
@@ -49,12 +49,29 @@ def task2():
     b = 15
     d = 1
     a = 10
-    xt = [5, -5, 5]
+    xt = [2.75, -5.75, 2.75]
 
-    print(stf(a, geval(L, b, d), xt))
+    print(stf(xt, a, geval(L, b, d)))
+
+def task3():
+    L = [11.5, 11.5, 11.5, 11.5, 11.5, 11.5]
+    b = 15
+    d = 1
+    a = 10
+
+    # Starting point of the X-coordinates
+    xt_start = [2.75, -5.75, 2.75]
+
+    # Solve for xt
+    xt = sci.fsolve(stf, xt_start, (a, geval(L, b, d)))
+
+    print(stf(xt, a, geval(L, b, d)))
 
 print("-- Task 1:")
 task1()
 
 print("\n-- Task 2:")
 task2()
+
+print("\n-- Task 3:")
+task3()
