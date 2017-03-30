@@ -7,21 +7,21 @@ def geval(L, b, d):
     res = []
 
     for i in [1,2,3]:
-        P_i = (1/(2*b))*(b**2 + L[2*i-2]**2 - L[2*i-1]**2)
+        P_i = (1/(2.0*b))*(b**2 + L[2*i-2]**2 - L[2*i-1]**2)
         h_i = math.sqrt(L[2*i-2]**2 - P_i**2)
         res.append([h_i, 0, 0])
-
+    # print(res)
     # XP1 and YP1
-    res[0][1] = (math.sqrt(3) / 6) * (2 * b + d - 3 * P_i)
-    res[0][2] = (1 / 2) * (d + P_i)
+    res[0][1] = (math.sqrt(3.0) / 6.0) * (2.0 * b + d - 3.0 * P_i)
+    res[0][2] = (1.0 / 2.0) * (d + P_i)
 
     # XP2 and YP2
-    res[1][1] = (-1) * (math.sqrt(3) / 6) * (b + 2 * d)
-    res[1][2] = (1 / 2) * (b - 2 * P_i)
+    res[1][1] = (-1) * (math.sqrt(3.0) / 6.0) * (b + 2.0 * d)
+    res[1][2] = (1 / 2.0) * (b - 2.0 * P_i)
 
     # XP3 and YP3
-    res[2][1] = (-1) * (math.sqrt(3) / 6) * (b - d - 3 * P_i)
-    res[2][2] = (-1) * (1 / 2) * (b + d - P_i)
+    res[2][1] = (-1) * (math.sqrt(3.0) / 6.0) * (b - d - 3.0 * P_i)
+    res[2][2] = (-1) * (1 / 2.0) * (b + d - P_i)
 
     return res
 
@@ -29,9 +29,9 @@ def geval(L, b, d):
 def stf(xt, a, gev):
     equations = []
 
-    equations.append(a**2 + 2*xt[0]*xt[1] - 2*xt[0]*(gev[0][1] + math.sqrt(3)*(gev[0][2]-gev[1][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[0][1]-gev[0][2] + gev[1][2])**2 + (gev[0][0]**2 + gev[1][0]**2) - 4*gev[0][1]**2 - gev[1][1]**2) + 2*math.sqrt((gev[0][0]**2 - 4*(xt[0]-gev[0][1])**2)*(gev[1][0]**2 - (xt[1] - gev[1][1])**2)))
-    equations.append(a**2 - 4*xt[0]*xt[2] - 2*xt[0]*(gev[0][1] - 3*gev[2][1] + math.sqrt(3)*(gev[0][2]-gev[2][2])) - 2*xt[2]*((-3)*gev[0][1] + gev[2][1] + math.sqrt(3)*(gev[0][2] - gev[2][2])) - ((math.sqrt(3)*(gev[0][1] + gev[2][1]) - gev[0][2] + gev[2][2])**2 + (gev[0][0]**2 + gev[2][0]**2) - 4*gev[0][1]**2 - 4*gev[2][1]**2) + 2*math.sqrt((gev[0][0]**2 - 4*(xt[0] - gev[0][1])**2)*(gev[2][0]**2 - 4*(xt[2] - gev[2][1])**2)))
-    equations.append(a**2 + 2*xt[1]*xt[2] - 2*xt[2]*(gev[2][1] + math.sqrt(3)*(gev[1][2] - gev[2][2])) - 2*gev[1][1]*xt[1] - ((math.sqrt(3)*gev[2][1] - gev[1][2] + gev[2][2])**2 + (gev[1][0]**2 + gev[2][0]**2) - gev[1][1]**2 - 4*gev[2][1]**2) + 2*math.sqrt((gev[1][0]**2 - (xt[1] - gev[1][1])**2)*(gev[2][0]**2 - 4*(xt[2] - gev[2][1])**2)))
+    equations.append(a**2 + 2.0*xt[0]*xt[1] - 2.0*xt[0]*(gev[0][1] + math.sqrt(3.0)*(gev[0][2]-gev[1][2])) - 2.0*gev[1][1]*xt[1] - ((math.sqrt(3.0)*gev[0][1]-gev[0][2] + gev[1][2])**2 + (gev[0][0]**2 + gev[1][0]**2) - 4.0*gev[0][1]**2 - gev[1][1]**2) + 2.0*math.sqrt((gev[0][0]**2 - 4.0*(xt[0]-gev[0][1])**2)*(gev[1][0]**2 - (xt[1] - gev[1][1])**2)))
+    equations.append(a**2 - 4.0*xt[0]*xt[2] - 2.0*xt[0]*(gev[0][1] - 3.0*gev[2][1] + math.sqrt(3.0)*(gev[0][2]-gev[2][2])) - 2.0*xt[2]*((-3.0)*gev[0][1] + gev[2][1] + math.sqrt(3.0)*(gev[0][2] - gev[2][2])) - ((math.sqrt(3.0)*(gev[0][1] + gev[2][1]) - gev[0][2] + gev[2][2])**2 + (gev[0][0]**2 + gev[2][0]**2) - 4.0*gev[0][1]**2 - 4.0*gev[2][1]**2) + 2.0*math.sqrt((gev[0][0]**2 - 4.0*(xt[0] - gev[0][1])**2)*(gev[2][0]**2 - 4.0*(xt[2] - gev[2][1])**2)))
+    equations.append(a**2 + 2.0*xt[1]*xt[2] - 2.0*xt[2]*(gev[2][1] + math.sqrt(3.0)*(gev[1][2] - gev[2][2])) - 2.0*gev[1][1]*xt[1] - ((math.sqrt(3.0)*gev[2][1] - gev[1][2] + gev[2][2])**2 + (gev[1][0]**2 + gev[2][0]**2) - gev[1][1]**2 - 4.0*gev[2][1]**2) + 2.0*math.sqrt((gev[1][0]**2 - (xt[1] - gev[1][1])**2)*(gev[2][0]**2 - 4.0*(xt[2] - gev[2][1])**2)))
 
     return equations
 
