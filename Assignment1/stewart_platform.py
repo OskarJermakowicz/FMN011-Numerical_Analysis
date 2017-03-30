@@ -2,6 +2,22 @@ import numpy as np
 import math
 import scipy.optimize as sci
 
+def bisection(f,a,b,tol):
+    res = []
+
+    while(((b-a)/2)>tol):
+        c = (a+b)/2
+        if( (f(c) * f(a))>0 ):
+            a=c
+        elif( (f(c)*f(b))>0 ):
+            b=c
+        else:
+            break
+
+    possible_err = (b-a)/2
+    res = f(c)
+    return res
+
 # Returns a list of three elements, for each i, which includes h, x and y for each.
 def geval(L, b, d):
     res = []
