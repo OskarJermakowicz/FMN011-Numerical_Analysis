@@ -11,7 +11,7 @@ def geval(L, b, d):
 
     for i in [1,2,3]:
         P_i = (1/(2.0*b))*(b**2 + L[2*i-2]**2 - L[2*i-1]**2)
-        h_i = math.sqrt(L[2*i-2]**2 - P_i**2)
+        h_i = math.sqrt(L[2*i-1]**2 - P_i**2)
         res.append([h_i, 0, 0])
 
     # XP1 and YP1
@@ -34,7 +34,6 @@ def stf(xt, a, gev):
     equations.append(a**2 + 2.0*xt[0]*xt[1] - 2.0*xt[0]*(gev[0][1] + math.sqrt(3.0)*(gev[0][2]-gev[1][2])) - 2.0*gev[1][1]*xt[1] - ((math.sqrt(3.0)*gev[0][1]-gev[0][2] + gev[1][2])**2 + (gev[0][0]**2 + gev[1][0]**2) - 4.0*gev[0][1]**2 - gev[1][1]**2) + 2.0*math.sqrt((gev[0][0]**2 - 4.0*(xt[0]-gev[0][1])**2)*(gev[1][0]**2 - (xt[1] - gev[1][1])**2)))
     equations.append(a**2 - 4.0*xt[0]*xt[2] - 2.0*xt[0]*(gev[0][1] - 3.0*gev[2][1] + math.sqrt(3.0)*(gev[0][2]-gev[2][2])) - 2.0*xt[2]*((-3.0)*gev[0][1] + gev[2][1] + math.sqrt(3.0)*(gev[0][2] - gev[2][2])) - ((math.sqrt(3.0)*(gev[0][1] + gev[2][1]) - gev[0][2] + gev[2][2])**2 + (gev[0][0]**2 + gev[2][0]**2) - 4.0*gev[0][1]**2 - 4.0*gev[2][1]**2) + 2.0*math.sqrt((gev[0][0]**2 - 4.0*(xt[0] - gev[0][1])**2)*(gev[2][0]**2 - 4.0*(xt[2] - gev[2][1])**2)))
     equations.append(a**2 + 2.0*xt[1]*xt[2] - 2.0*xt[2]*(gev[2][1] + math.sqrt(3.0)*(gev[1][2] - gev[2][2])) - 2.0*gev[1][1]*xt[1] - ((math.sqrt(3.0)*gev[2][1] - gev[1][2] + gev[2][2])**2 + (gev[1][0]**2 + gev[2][0]**2) - gev[1][1]**2 - 4.0*gev[2][1]**2) + 2.0*math.sqrt((gev[1][0]**2 - (xt[1] - gev[1][1])**2)*(gev[2][0]**2 - 4.0*(xt[2] - gev[2][1])**2)))
-
     return equations
 
 def yt_coords(xt, gev):
@@ -112,12 +111,15 @@ def task3():
     print(stf(xt, a, geval(L, b, d)))
 
 def task5():
+    L = [8, 15, 8, 15, 8, 15]
     b = 15
     d = 1
     a = 10
 
     # Starting point of the X-coordinates
     xt_start = [3, -6, 3]
+
+    print(geval(L, b, d)[0])
 
     xt = sci.fsolve(stf, xt_start, (a, geval(L, b, d)))
     yt = yt_coords(xt, geval(L, b, d))
