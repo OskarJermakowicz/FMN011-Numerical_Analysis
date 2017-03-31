@@ -112,7 +112,6 @@ def task3():
     print(stf(xt, a, geval(L, b, d)))
 
 def task5():
-    L = [8, 8, 8, 8, 8, 8]
     b = 15
     d = 1
     a = 10
@@ -131,6 +130,11 @@ def task5():
     ax = fig.add_subplot(111, projection='3d')
     ax.plot_trisurf(xt, yt, zt, color='black')
     ax.plot_trisurf(base_x, base_y, base_z, color='blue')
+
+    for i in [0,1,2]:
+        ax.plot([base_x[i*2], xt[i]], [base_y[i*2], yt[i]], [base_z[0], zt[i]], 'k-', lw=2, color='red')
+        ax.plot([base_x[i*2+1], xt[i]], [base_y[i*2+1], yt[i]], [base_z[0], zt[i]], 'k-', lw=2, color='red')
+
     x_label = ax.set_xlabel('\nX')
     y_label = ax.set_ylabel('\nY')
     z_label = ax.set_zlabel('\nZ')
